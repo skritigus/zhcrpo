@@ -4,7 +4,7 @@ This program allows to administer a dance center.
 
 Operation system: Desktop
 
-Language: Java 
+Language: Java  
 Interface language: JavaScript/React
 
 [SRS of program](https://github.com/bootgussy/zhcrpo/blob/main/docs/SRS.md) 
