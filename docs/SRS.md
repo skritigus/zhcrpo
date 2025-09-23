@@ -21,7 +21,7 @@
 3.1.1 [Основные функции](#main_functions)  
 3.1.1.1 [Управление сущностями](#entity_managment)  
 3.1.1.2 [Управление расписанием](#schedule_managment)  
-3.1.1.3 [Отчетность](#reports)
+3.1.1.3 [Отчетность](#reports)  
 3.1.2 [Ограничения и исключения](#restrictions_and_exclusions)  
 3.2 [Нефункциональные требования](#non-functional_requirements)  
 3.2.1 [Атрибуты качества](#quality_attributes)  
