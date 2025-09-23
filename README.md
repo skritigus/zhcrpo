@@ -2,7 +2,7 @@
 
 This program allows to find a taxi.
 
-Operation system: IOS
+Operation system: Desktop
 
 Language: GoLang 
 Interface language: ...
