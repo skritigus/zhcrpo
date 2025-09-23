@@ -72,57 +72,29 @@
 <a name="user_interface"/>
 
 ## 2.2 Интерфейс пользователя
-Окно входа в приложение.  
+Главное окно приложения.  
 
-![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignInMockup.png)  
+![Главное окно приложения](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/MainWindow.png)  
 
-Окно регистрации нового пользователя.  
+Окно расписания занятий.  
 
-![Окно регистрации нового пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningUpMockup.png) 
+![Окно расписания занятий](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/ScheduleWindow.png) 
 
-Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении. 
+Окно работы с группами. 
 
-![Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/CheckOfCorrectSigningUpMockup%20.png)  
+![Окно работы с группами](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/GroupWindow.png)  
 
-Окно входа для зарегистрированного пользователя.  
+Окно работы с тренерами.  
 
-![Окно входа для зарегистрированного пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningInMockup.png).
+![Окно работы с тренерами](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/GroupWindow.png).
 
-Главное окно приложения (пользователь зарегистрирован). 
+Окно работы со студентами. 
 
-![Главное окно приложения](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmListMockup.png)  
+![Окно работы со студентами](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/StudentWindow.png)  
 
-Главное окно приложения после выбора фильма в таблице (пользователь зарегистрирован). 
+Окно работы с залами. 
 
-![Главное окно приложения после выбора фильма в таблице](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmInformationMockup.png) 
-
-Окно поиска (пользователь зарегистрирован). 
-
-![Окно поиска](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmSearchMockup.png) 
-
-Окно поиска при ошибке (пользователь зарегистрирован). 
-
-![Окно поиска при ошибке](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmSearchErrorMockup.png)  
-
-Окно с информацией о найденном фильме (пользователь зарегистрирован).  
-
-![Окно с информацией о найденном фильме](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserSerchedFilmInformationMockup%20.png)  
-
-Окно с выделением фильма, который будут удалять (пользователь зарегистрирован).  
-
-![Окно с выделением фильма, который будут удалять](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SelectToDeleteFilmMockup.png) 
-
-Главное окно приложения (посетитель).  
-
-![Главное окно приложения посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchMockup.png)  
-
-Главное окно приложения при ошибке поиска (посетитель).  
-
-![Главное окно приложения при ошибке поиска посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchErrorMockup.png)    
-
-Окно с информацией о найденном фильме (посетитель).  
-
-![Окно с информацией о найденном фильме посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserSerchedFilmInformationMockup%20.png)  
+![Окно работы с залами](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/HallWindow.png) 
 
 <a name="user_specifications"/>
 
