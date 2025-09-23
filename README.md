@@ -1,23 +1,22 @@
-# Taxi
+# Dance Center Service
 
-This program allows to find a taxi.
+This program allows to administer a dance center.
 
 Operation system: Desktop
 
-Language: GoLang 
-Interface language: ...
+Language: Java 
+Interface language: JavaScript/React
 
-[SRS of program](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Requirements/SRS.md) 
+[SRS of program](https://github.com/bootgussy/zhcrpo/blob/main/docs/SRS.md) 
 
-[User interface images](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/Mockups)
+[User interface images](https://github.com/bootgussy/zhcrpo/tree/main/docs/mockups)
 
-[Diagrams](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/Diagrams)
+[Diagrams]()
 
-[Go code](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/code/java%20classes)  
-[... code](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/code/layout%20xml) 
+[Java code](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/code/java%20classes)  
+[JavaScript/React code](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/code/layout%20xml) 
 
 Used patterns:  
-Observer - listeners of buttons
 
-[Test plan](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Test%20plan.md)  
-[Test results](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Test%20results.md) 
+[Test plan]()  
+[Test results]() 
