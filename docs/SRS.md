@@ -86,7 +86,7 @@
 
 Окно работы с тренерами.  
 
-![Окно работы с тренерами](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/GroupWindow.png).
+![Окно работы с тренерами](https://github.com/bootgussy/zhcrpo/blob/main/docs/mockups/TrainerWindow.png).
 
 Окно работы со студентами. 
 
