@@ -10,20 +10,20 @@
 
 ### 1. Добавление в Расписание<a name="1"></a>
 
-![Добавление в Расписание](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramSignIn_.png)
+![Добавление в Расписание](https://github.com/bootgussy/zhcrpo/blob/main/diagrams/images/ActivitySchedule.png)
 
 ### 2. Добавление в Группы<a name="2"></a>
 
-![Добавление в Группы](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramSignUp.png)
+![Добавление в Группы](https://github.com/bootgussy/zhcrpo/blob/main/diagrams/images/ActivityGroups.png)
   
 ### 3. Добавление в Тренеры<a name="3"></a>
 
-![Добавление в Тренеры](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramAddFilm.png)
+![Добавление в Тренеры](https://github.com/bootgussy/zhcrpo/blob/main/diagrams/images/ActivityTrainers.png)
 
 ### 4. Добавление в Студенты<a name="4"></a>
 
-![Добавление в Студенты](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramAddFilm.png)
+![Добавление в Студенты](https://github.com/bootgussy/zhcrpo/blob/main/diagrams/images/ActivityStudents.png)
 
 ### 5. Добавление в Залы<a name="5"></a>
 
-![Добавление в Залы](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramAddFilm.png)
+![Добавление в Залы](https://github.com/bootgussy/zhcrpo/blob/main/diagrams/images/ActivityHalls.png)
