@@ -1,6 +1,6 @@
 # Диаграмма вариантов использования
 
-![Диаграмма вариантов использования](https://github.com/bootgussy/zhcrpo/blob/main/docs/UseCase.png) 
+![Диаграмма вариантов использования](https://github.com/bootgussy/zhcrpo/blob/main/diagrams/images/UseCase.png) 
 
 # Глоссарий
 
