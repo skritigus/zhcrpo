@@ -1,0 +1,84 @@
+/* src/styles/GroupsPage.css */
+.groups-page-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.groups-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Оставим отступ под шапкой */
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.groups-header h1 {
+    margin: 0;
+    color: #333;
+    font-size: 2rem; /* Размер как на скриншоте */
+}
+
+/* Стили для контейнера поиска и самого инпута */
+.search-bar-container {
+    margin-bottom: 25px; /* Отступ под полем поиска */
+}
+
+.groups-search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+.groups-search-input:focus {
+    border-color: #86b7fe; /* Подсветка при фокусе, как у других полей */
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+
+.loading-message,
+.error-message,
+.no-groups-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+}
+
+/* Уведомления теперь глобальные в main.css, эти можно удалить, если дублируются */
+/* .notification { ... } */
+
+/* Кнопки также могут быть глобальными или специфичными */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px; /* Как на скриншоте */
+    cursor: pointer;
+    font-size: 0.95rem; /* Как на скриншоте */
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #6f42c1; /* Фиолетовый, как на скриншоте */
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #5e37a6;
+}

@@ -1,0 +1,140 @@
+:root {
+  --bg-color: #f9f9f9;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --border-radius: 12px;
+  /* Убираем старую тень отсюда, если она была только для примера карточек */
+  /* --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05); */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.page-container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #2d3436;
+  text-align: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Стили для уведомлений */
+.app-notification {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 6px;
+  color: white;
+  z-index: 1550;
+  min-width: 280px;
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+  /* Добавляем тень */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.40), 0 1px 3px rgba(0,0,0,0.1);
+  /*
+     Первая тень: 0 (смещение по X), 4px (смещение по Y), 12px (размытие), rgba(0,0,0,0.15) (цвет и прозрачность)
+     Вторая тень (более тонкая, для объема): 0 (X), 1px (Y), 3px (размытие), rgba(0,0,0,0.1) (цвет и прозрачность)
+     Вы можете настроить эти значения по своему вкусу.
+  */
+}
+
+.app-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.app-notification.success {
+  background-color: #28a745;
+}
+
+.app-notification.error {
+  background-color: #dc3545;
+}
+.app-notification.warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.container.mt-4 {
+  padding-top: 1rem;
+}
+
+.page-transition-enter {
+  opacity: 0;
+}
+.page-transition-enter-active {
+  opacity: 1;
+  /* Анимация входа начинается ПОСЛЕ того, как закончится анимация выхода */
+  transition: opacity 300ms ease-out 300ms; /* opacity | duration | easing | delay */
+  /* delay равен длительности exit анимации */
+}
+.page-transition-exit {
+  opacity: 1;
+}
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in; /* Длительность исчезновения */
+}
+
+/* Контейнер для TransitionGroup */
+.route-section-wrapper {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+}
+
+/* Обертка внутри CSSTransition (которая с ref) */
+/* Важно, чтобы во время перехода оба элемента (старый и новый) занимали одно и то же место, */
+/* чтобы не было "прыжка" контента. Это достигается абсолютным позиционированием. */
+.page-container-for-transition {
+  width: 100%;
+  height: 100%; /* Если родитель .route-section-wrapper имеет определенную высоту */
+  position: absolute; /* <--- КЛЮЧЕВОЙ МОМЕНТ для наложения */
+  top: 0;
+  left: 0;
+}
+
+
+/* ... (остальные стили, включая .app-layout и .page-content-area) ... */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-layout > .navbar {
+  flex-shrink: 0;
+}
+.app-layout > .container.mt-4.page-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: relative; /* Для правильной работы TransitionGroup с абсолютными детьми */
+  /* overflow: hidden; */ /* Можно убрать, если .page-container-for-transition будет absolute */
+}

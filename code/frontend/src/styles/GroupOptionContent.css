@@ -1,0 +1,76 @@
+/* src/styles/GroupOptionContent.css (НЕ .module.css) */
+.optionContentWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 8px;
+    line-height: 1.4;
+    font-size: 13px;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    box-sizing: border-box;
+}
+.optionContentWrapper:last-child {
+    border-bottom: none;
+}
+.optionContentWrapper:hover { /* Для ховера в списке опций кастомного селекта */
+    background-color: #f7f7f9;
+}
+
+.mainInfoLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.optionDanceStyle {
+    font-weight: 600;
+    color: #5e2ced;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex-shrink: 1;
+}
+
+.flexGrowPlaceholder {
+    flex-grow: 1;
+}
+
+.optionDifficulty { /* Базовый класс */
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    flex-shrink: 0;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+/* Специфичные классы для сложности */
+.optionDifficulty.beg { /* Применится, если className="optionDifficulty beginner" */
+    background-color: #e9ecef;
+    color: #495057;
+}
+.optionDifficulty.mid {
+    background-color: #fff3cd;
+    color: #ffc107;
+}
+.optionDifficulty.pro {
+    background-color: #f0e6ff;
+    color: #5e2ced;
+}
+
+.optionTrainerName, .optionGroupName {
+    font-size: 0.9em;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+.optionGroupName {
+    font-weight: 500;
+}

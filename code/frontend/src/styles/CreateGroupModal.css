@@ -1,0 +1,347 @@
+/* src/styles/CreateGroupModal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200;
+}
+
+.modal-content.create-group-modal-content { /* Добавляем специфичный класс для этой модалки */
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 550px; /* Можно немного увеличить для студентов */
+    position: relative;
+    max-height: 90vh; /* Ограничение по высоте */
+    overflow-y: auto; /* Включаем скролл, если контент не помещается */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.modal-close-btn:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center; /* Заголовок по центру, как на скриншоте */
+}
+
+.form-group {
+    margin-bottom: 18px; /* Увеличил отступ между группами полей */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px; /* Увеличил отступ под лейблом */
+    font-weight: 500; /* Немного жирнее, как на скриншоте */
+    color: #333; /* Темнее цвет лейбла */
+}
+
+.form-group input[type="text"], /* Это правило больше не нужно для сложности */
+.form-group select {
+    width: 100%;
+    padding: 10px 12px; /* Стандартные паддинги для селекта */
+    border: 1px solid #ccc; /* Граница чуть темнее */
+    border-radius: 6px; /* Скругление как на скриншоте */
+    box-sizing: border-box;
+    background-color: #f8f9fa; /* Светлый фон для селекта */
+    font-size: 1rem;
+}
+
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 42px; /* Сопоставимо с другими инпутами */
+    box-sizing: border-box;
+}
+.custom-select-input.focused {
+    border-color: #007bff; /* Пример цвета при фокусе */
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.custom-select-placeholder {
+    color: #6c757d;
+}
+
+.custom-select-arrow {
+    font-size: 0.8em;
+    color: #555;
+    transition: transform 0.2s ease-in-out;
+}
+.custom-select-arrow.open {
+    transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+    z-index: 1010; /* Выше других элементов в модалке */
+    max-height: 200px; /* Ограничение высоты списка */
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-select-search {
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 0.95rem;
+}
+.custom-select-search:focus {
+    outline: none;
+    border-bottom-color: #007bff;
+}
+
+.custom-select-options {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.custom-select-option {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.custom-select-option:hover {
+    background-color: #f0f0f0;
+}
+/* Стили для StudentOptionContent внутри селекта */
+.custom-select-option .student-option-content-wrapper {
+    border-bottom: none; /* Убираем границу, если она есть у компонента */
+    padding: 0;
+}
+.custom-select-option .student-option-content-wrapper:hover {
+    background-color: transparent; /* Ховер управляется .custom-select-option:hover */
+}
+
+
+.custom-select-no-options {
+    padding: 10px;
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+}
+
+.trainer-option-display {
+    display: flex;
+    flex-direction: row;
+    padding: 8px 12px;
+    max-width: fit-content;
+    gap: 10px;
+    align-items: center;
+}
+
+.trainer-option-display .trainer-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 2px;
+}
+
+.trainer-option-display .trainer-style {
+    font-size: 0.85em;
+    color: #6c757d;
+}
+
+/* Секция управления студентами */
+.students-management-section {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.students-list-modal {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+    max-height: 150px; /* Ограничение высоты списка студентов */
+    overflow-y: auto;
+}
+.students-list-modal li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px dashed #f0f0f0;
+    font-size: 0.95em;
+}
+.students-list-modal li:last-child {
+    border-bottom: none;
+}
+
+.btn-remove-student-modal {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: 1px solid #dc3545;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+.btn-remove-student-modal:hover {
+    background-color: #c82333;
+    color: #ffffff;
+    border: 1px solid #c82333;
+}
+
+.no-students-message {
+    font-style: italic;
+    color: #777;
+    font-size: 0.9em;
+}
+
+.add-student-form-modal {
+    margin-top: 10px;
+}
+.student-select-modal .custom-select-input { /* Немного другие стили для инпута выбора студента */
+    background-color: #fff; /* Белый фон */
+}
+
+.btn-add-student-modal {
+    background-color: #e0e0e0; /* Светло-серая кнопка */
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block; /* Чтобы была на всю ширину или по центру */
+    /* width: 100%; или margin-left: auto; margin-right: auto; */
+}
+.btn-add-student-modal:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.btn-add-student-modal:not(:disabled):hover {
+    background-color: #d0d0d0;
+}
+
+.modal-actions {
+    text-align: right;
+    margin-top: 30px; /* Увеличил отступ перед кнопками */
+}
+
+/* Стили для кнопок "Отмена" и "Создать/Сохранить" из скриншота */
+.btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.btn.btn-primary { /* Кнопка "Создать" */
+    background-color: #6a11cb; /* Яркий синий */
+    color: white;
+}
+.btn.btn-primary:hover {
+    background-color: #5e0fa9;
+    transform: translateY(-1px);
+}
+
+/* Кнопка "Отмена" - светло-серая с черным текстом */
+.modal-actions .btn:first-child { /* Предполагаем, что "Отмена" первая */
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd; /* Можно добавить легкую границу */
+}
+.modal-actions .btn:first-child:hover {
+    background-color: #e0e0e0;
+}
+
+.difficulty-buttons-container {
+    display: flex;
+    justify-content: center; /* Центрируем кнопки в контейнере */
+    gap: 10px; /* Отступ между кнопками */
+    margin-top: 5px; /* Небольшой отступ от лейбла */
+}
+
+.difficulty-btn {
+    padding: 8px 15px;
+    border: 0px;
+    border-radius: 18px; /* Более круглые кнопки */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    background-color: #f8f7f7; /* Изначально серые (default) */
+    color: #555;
+}
+
+.difficulty-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Стили для ВЫБРАННЫХ кнопок */
+.difficulty-btn.selected.beg {
+    background-color: #e9ecef;
+    color: #495057;
+    border-color: #d3d9df; /* Граница в тон */
+}
+.difficulty-btn.selected.mid {
+    background-color: #fff3cd;
+    color: #856404; /* Более темный для контраста на желтом */
+    border-color: #ffeeba; /* Граница в тон */
+}
+.difficulty-btn.selected.pro {
+    background-color: #f0e6ff; /* Фиолетовый фон */
+    color: #5e2ced;       /* Фиолетовый текст */
+    border-color: #dadaff; /* Граница в тон */
+}

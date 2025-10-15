@@ -1,0 +1,124 @@
+/* src/styles/SchedulePage.css */
+.schedule-page-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 70px - 40px); /* Пример: 100vh - Navbar - отступы. Подберите! */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.page-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Важно для вертикального выравнивания */
+    margin-bottom: 20px;
+    padding: 12px 20px; /* Уменьшил вертикальные паддинги, чтобы соответствовать скриншоту */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.page-title {
+    margin: 0;
+    font-size: 1.8rem; /* Как на скриншоте */
+    font-weight: 700; /* Жирный */
+    color: #333;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    transform: translateY(15px);
+}
+
+/* Стили для кнопки "Добавить занятие" */
+.page-header-button {
+    background-color: #6f42c1; /* Фиолетовый, как на скриншоте */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.95rem; /* Нормальный размер шрифта */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Небольшая тень для кнопки */
+    white-space: nowrap; /* Чтобы текст не переносился */
+}
+.page-header-button:hover {
+    background-color: #5e37a6;
+    transform: translateY(-1px);
+}
+.page-header-button:active {
+    background-color: #492688;
+    transform: translateY(0px);
+}
+
+.schedule-table {
+    width: 100%;
+    min-width: 900px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.hall-selector-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Уменьшил отступ */
+    flex-shrink: 0; /* Селектор залов не должен сжиматься */
+}
+
+.hall-selector {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    flex-grow: 1;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #c5c5c5;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+}
+
+.hall-button {
+    padding: 10px 20px;
+    margin-right: 12px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    color: #333;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.hall-button:last-child {
+    margin-right: 0;
+}
+
+.hall-button:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.hall-button.active {
+    background-color: #6f42c1;
+    color: white;
+    border-color: #6f42c1;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(111, 66, 193, 0.3);
+}

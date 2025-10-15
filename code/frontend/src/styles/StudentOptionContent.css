@@ -1,0 +1,50 @@
+/* src/styles/StudentOptionContent.css */
+.student-option-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px; /* Немного больше отступы для читаемости */
+    line-height: 1.4;
+    font-size: 14px; /* Чуть крупнее для основного текста */
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    box-sizing: border-box;
+}
+
+.student-option-content-wrapper:last-child {
+    border-bottom: none;
+}
+
+/* Стиль для опции в выпадающем списке при наведении */
+.student-option-item:hover .student-option-content-wrapper {
+    background-color: #f7f7f9;
+}
+
+.student-main-info {
+    display: flex;
+    justify-content: space-between; /* Если захотите добавить что-то справа */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.student-name {
+    font-weight: 600;
+    color: #333; /* Основной цвет текста */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-phone-number {
+    font-size: 0.9em;
+    color: #555; /* Менее яркий цвет для доп. информации */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-option-placeholder {
+    color: #757575;
+    padding: 8px 10px;
+}
