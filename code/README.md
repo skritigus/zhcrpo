@@ -16,10 +16,10 @@ Full-stack web application for managing dance studios with:
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/bootgussy/DanceCenterService.git
+   git clone https://github.com/bootgussy/zhcrpo.git
    ```
    ```bash
-   cd DanceCenterService
+   cd zhcrpo/code
    ```
 2. Start the application:
    ```bash
