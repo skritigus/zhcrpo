@@ -20,9 +20,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0 10px; 
 }
+
 
 .navbar-brand {
     display: flex;
@@ -76,4 +76,26 @@
     height: 3px;
     background-color: var(--text-light);
     border-radius: 3px;
+}
+
+.navbar-auth {
+    display: flex;
+    align-items: center;
+    margin-left: 5rem;
+}
+
+.auth-btn:hover {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+}
+
+.auth-btn {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid var(--text-light); /* белая рамка */
+    border-radius: 30px;
+    color: var(--text-light);            /* белый текст */
+    background: transparent;             /* прозрачный фон, совпадает с Navbar */
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
 }
