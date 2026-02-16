@@ -28,7 +28,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody LoginRequest request) {
-        // По умолчанию регистрируем как студента
+
         authService.register(request, "ROLE_STUDENT");
         return ResponseEntity.ok("Пользователь успешно зарегистрирован");
     }
@@ -46,7 +46,7 @@ public class AuthenticationController {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Если пароль верный, возвращаем роли
+
             List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .toList();
@@ -54,7 +54,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(new AuthenticationResponse(loginRequest.getUsername(), roles));
 
         } catch (BadCredentialsException e) {
-            // Если пароль неверный
+
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong login or password");
         }
     }
