@@ -15,6 +15,9 @@ public abstract class TrainerMapper {
     @Autowired
     protected GroupRepository groupRepository;
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "groups", ignore = true)
+    @Mapping(target = "user", ignore = true)
     public abstract Trainer toEntity(TrainerCreateDto trainerCreateDto);
 
     @Mapping(target = "groupsId",

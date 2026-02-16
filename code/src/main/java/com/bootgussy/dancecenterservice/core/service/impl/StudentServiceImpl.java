@@ -50,20 +50,20 @@ public class StudentServiceImpl implements StudentService {
         Student savedStudent;
 
         if (
-                student.getName() == null ||
-                        student.getPhoneNumber() == null
+                student.getUser().getName() == null ||
+                        student.getUser().getPhoneNumber() == null
         ) {
             throw new ResourceNotFoundException("Incorrect JSON. All fields must be filled " +
                     "(name, phoneNumber).");
         }
 
-        if (studentRepository.findByNameAndPhoneNumber(student.getName(), student.getPhoneNumber())
+        if (studentRepository.findByNameAndPhoneNumber(student.getUser().getName(), student.getUser().getPhoneNumber())
                 .isEmpty()) {
             savedStudent = studentRepository.save(student);
         } else {
             throw new AlreadyExistsException("Student already exists." +
-                    " Name: " + student.getName() +
-                    ", Phone number: " + student.getPhoneNumber());
+                    " Name: " + student.getUser().getName() +
+                    ", Phone number: " + student.getUser().getPhoneNumber());
         }
 
         cacheConfig.putStudent(savedStudent.getId(), savedStudent);
@@ -76,18 +76,18 @@ public class StudentServiceImpl implements StudentService {
         Student updatedStudent;
 
         if (
-                student.getName() == null ||
-                        student.getPhoneNumber() == null
+                student.getUser().getName() == null ||
+                        student.getUser().getPhoneNumber() == null
         ) {
             throw new ResourceNotFoundException("Incorrect JSON. All fields must be filled " +
                     "(name, phoneNumber).");
         }
 
-        if (!studentRepository.findByNameAndPhoneNumber(student.getName(), student.getPhoneNumber())
+        if (!studentRepository.findByNameAndPhoneNumber(student.getUser().getName(), student.getUser().getPhoneNumber())
                 .isEmpty()) {
             throw new AlreadyExistsException("Student already exists." +
-                    " Name: " + student.getName() +
-                    ", Phone number: " + student.getPhoneNumber());
+                    " Name: " + student.getUser().getName() +
+                    ", Phone number: " + student.getUser().getPhoneNumber());
         }
 
         if (studentRepository.findById(student.getId()).isPresent()) {
@@ -95,8 +95,8 @@ public class StudentServiceImpl implements StudentService {
         } else {
             throw new ResourceNotFoundException("The student does not exist." +
                     " ID: " + student.getId() +
-                    ", Name: " + student.getName() +
-                    ", Phone number: " + student.getPhoneNumber());
+                    ", Name: " + student.getUser().getName() +
+                    ", Phone number: " + student.getUser().getPhoneNumber());
         }
 
         cacheConfig.putStudent(updatedStudent.getId(), updatedStudent);

@@ -1,40 +1,29 @@
 package com.bootgussy.dancecenterservice.core.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
-@Builder
+@Entity
+@Table(name = "roles")
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "students")
-public class Student {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "students", cascade = {
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
+
+    @ManyToMany(mappedBy = "roles", cascade = {
             CascadeType.MERGE,
             CascadeType.PERSIST
     }, fetch = FetchType.LAZY)
-    private List<Group> groups;
-
-    @PreRemove
-    private void removeGroupAssociations() {
-        for (Group group : this.groups) {
-            group.getStudents().remove(this);
-        }
-    }
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    List<User> users;
 }
