@@ -1,11 +1,20 @@
 // src/services/api.js
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'http://localhost:8080/api';
 
 async function request(endpoint, options = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
     // console.log(`[API] Запрос: ${options.method || 'GET'} ${url}`);
     // console.log(`[API] Тело запроса для ${options.method || 'GET'} ${url}:`, options.body);
 
+    const headers = {
+        ...options.headers,
+        'X-Role': 'ROLE_ADMIN' // ВРЕМЕННО прописываем роль жестко для теста
+    };
+
+    const config = {
+        ...options,
+        headers: headers
+    };
 
     try {
         const response = await fetch(url, options);

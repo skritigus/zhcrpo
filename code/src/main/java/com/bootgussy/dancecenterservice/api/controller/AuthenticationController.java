@@ -6,12 +6,12 @@ import com.bootgussy.dancecenterservice.core.service.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+/*import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;*/
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/auth")
 @Tag(name = "Authentification", description = "API for authentification")
 public class AuthenticationController {
-    private AuthenticationManager authenticationManager;
+    //private AuthenticationManager authenticationManager;
     private AuthService authService;
 
     @PostMapping("/register")
@@ -35,27 +35,27 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            // AuthenticationManager сам проверит пароль, используя ваш CustomUserDetailsService
-            Authentication authentication = authenticationManager.authenticate(
+        //try {
+
+            /*Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginRequest.getUsername(),
                             loginRequest.getPassword()
                     )
-            );
+            );*/
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            //SecurityContextHolder.getContext().setAuthentication(authentication);
 
 
-            List<String> roles = authentication.getAuthorities().stream()
+            /*List<String> roles = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
-                    .toList();
+                    .toList();*/
 
-            return ResponseEntity.ok(new AuthenticationResponse(loginRequest.getUsername(), roles));
+            return ResponseEntity.ok(ResponseEntity.badRequest()/*new AuthenticationResponse(loginRequest.getUsername(), roles)*/);
 
-        } catch (BadCredentialsException e) {
+            //} catch (/*BadCredentialsException e*/) {
 
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong login or password");
-        }
+            //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong login or password");
+        //}
     }
 }
