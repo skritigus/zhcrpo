@@ -21,6 +21,8 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './styles/main.css';
 
+import AuthModal from "./components/Auth/AuthModal";
+
 // Создаем контекст для передачи данных и функций в AnimatedRoutes
 const AppContext = createContext(null);
 
@@ -65,28 +67,29 @@ const AnimatedRoutes = () => {
                     <Routes location={location}>
                         <Route
                             path="/"
-                            element={ <SchedulePage halls={halls} groups={groups} scheduleItems={scheduleItems} isLoadingAppLevelData={isLoadingAppLevelData} onAddSlotClick={handleOpenAddModal} onViewItemClick={handleOpenViewModal} onAddNewScheduleItemClick={() => handleOpenAddModal(null)} /> }
+                            element={<SchedulePage halls={halls} groups={groups} scheduleItems={scheduleItems} isLoadingAppLevelData={isLoadingAppLevelData} onAddSlotClick={handleOpenAddModal} onViewItemClick={handleOpenViewModal} onAddNewScheduleItemClick={() => handleOpenAddModal(null)} />}
                         />
                         <Route
                             path="/schedule"
-                            element={ <SchedulePage halls={halls} groups={groups} scheduleItems={scheduleItems} isLoadingAppLevelData={isLoadingAppLevelData} onAddSlotClick={handleOpenAddModal} onViewItemClick={handleOpenViewModal} onAddNewScheduleItemClick={() => handleOpenAddModal(null)} /> }
+                            element={<SchedulePage halls={halls} groups={groups} scheduleItems={scheduleItems} isLoadingAppLevelData={isLoadingAppLevelData} onAddSlotClick={handleOpenAddModal} onViewItemClick={handleOpenViewModal} onAddNewScheduleItemClick={() => handleOpenAddModal(null)} />}
                         />
                         <Route
                             path="/groups"
-                            element={ <GroupsPage appGroups={groups} appAllStudents={allStudents} appAllTrainers={allTrainers} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} /> }
+                            element={<GroupsPage appGroups={groups} appAllStudents={allStudents} appAllTrainers={allTrainers} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} />}
                         />
                         <Route
                             path="/trainers"
-                            element={ <TrainersPage appAllTrainers={allTrainers} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} /> }
+                            element={<TrainersPage appAllTrainers={allTrainers} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} />}
                         />
                         <Route
                             path="/students"
-                            element={ <StudentsPage appAllStudents={allStudents} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} /> }
+                            element={<StudentsPage appAllStudents={allStudents} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} />}
                         />
                         <Route
                             path="/halls"
-                            element={ <HallsPage appAllHalls={halls} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} /> }
+                            element={<HallsPage appAllHalls={halls} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} />}
                         />
+                        <Route path="/login" element={<Auth />} />
                     </Routes>
                 </div>
             </CSSTransition>
@@ -105,6 +108,8 @@ function App() {
     const [scheduleItems, setScheduleItems] = useState([]);
     const [allStudents, setAllStudents] = useState([]);
     const [allTrainers, setAllTrainers] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
+
 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null); // Общая ошибка загрузки
@@ -176,6 +181,11 @@ function App() {
         setIsModalOpen(false); setModalInitialData(null); setModalExistingItem(null);
     }, []);
 
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+    const handleOpenAuthModal = () => setIsAuthModalOpen(true);
+    const handleCloseAuthModal = () => setIsAuthModalOpen(false);
+
     const handleSaveSchedule = useCallback(async (newScheduleData) => {
         try {
             await addScheduleItem(newScheduleData);
@@ -185,7 +195,7 @@ function App() {
         } catch (error) {
             let detailedErrorMessage;
             if (error.status === 409) { detailedErrorMessage = "Данное время в этом зале занято"; }
-            else { const apiMsg = error.message || "Неизв.ошибка"; detailedErrorMessage = `Ошибка добавления: ${apiMsg.replace(/^Не удалось.+Ошибка API: \d{3}\. /,'').replace(/^Ошибка API: \d{3}\. /,'') || "сервера."}`; }
+            else { const apiMsg = error.message || "Неизв.ошибка"; detailedErrorMessage = `Ошибка добавления: ${apiMsg.replace(/^Не удалось.+Ошибка API: \d{3}\. /, '').replace(/^Ошибка API: \d{3}\. /, '') || "сервера."}`; }
             showAppNotification(detailedErrorMessage, "error", 6000);
         }
     }, [reloadScheduleItems, showAppNotification, handleCloseModal]);
@@ -199,7 +209,7 @@ function App() {
         } catch (error) {
             let detailedErrorMessage;
             if (error.status === 409) { detailedErrorMessage = "Данное время в этом зале занято"; }
-            else { const apiMsg = error.message || "Неизв.ошибка"; detailedErrorMessage = `Ошибка обновления: ${apiMsg.replace(/^Не удалось.+Ошибка API: \d{3}\. /,'').replace(/^Ошибка API: \d{3}\. /,'') || "сервера."}`; }
+            else { const apiMsg = error.message || "Неизв.ошибка"; detailedErrorMessage = `Ошибка обновления: ${apiMsg.replace(/^Не удалось.+Ошибка API: \d{3}\. /, '').replace(/^Ошибка API: \d{3}\. /, '') || "сервера."}`; }
             showAppNotification(detailedErrorMessage, "error", 7000);
         }
     }, [reloadScheduleItems, showAppNotification, handleCloseModal]);
@@ -212,7 +222,7 @@ function App() {
             await reloadScheduleItems();
         } catch (error) {
             const apiMsg = error.message || "Неизв.ошибка";
-            showAppNotification(`Ошибка удаления: ${apiMsg.replace(/^Не удалось.+Ошибка API: \d{3}\. /,'').replace(/^Ошибка API: \d{3}\. /,'') || "сервера."}`, "error");
+            showAppNotification(`Ошибка удаления: ${apiMsg.replace(/^Не удалось.+Ошибка API: \d{3}\. /, '').replace(/^Ошибка API: \d{3}\. /, '') || "сервера."}`, "error");
         }
     }, [reloadScheduleItems, showAppNotification, handleCloseModal]);
 
@@ -228,8 +238,8 @@ function App() {
         <AppContext.Provider value={appContextValue}>
             <Router>
                 <div className="app-layout"> {/* Обертка для управления высотой */}
-                    <Navbar />
-                    {notification.show && ( <div className={`app-notification ${notification.type} ${notification.show ? 'show' : ''}`}>{notification.message}</div> )}
+                    <Navbar onLoginClick={handleOpenAuthModal} currentUser={currentUser} />
+                    {notification.show && (<div className={`app-notification ${notification.type} ${notification.show ? 'show' : ''}`}>{notification.message}</div>)}
 
                     <div className="container mt-4 page-content-area"> {/* Для основного контента страницы */}
                         <AnimatedRoutes /> {/* Анимированные маршруты */}
@@ -246,6 +256,9 @@ function App() {
                         initialData={modalInitialData}
                         existingItem={modalExistingItem}
                     />
+
+                    {/* Модальное окно */}
+                    <AuthModal isOpen={isAuthModalOpen} onClose={handleCloseAuthModal} />
                 </div>
             </Router>
         </AppContext.Provider>

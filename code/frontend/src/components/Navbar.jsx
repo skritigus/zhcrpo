@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import './../styles/Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick, currentUser }) => {
     const location = useLocation();
 
     return (
@@ -43,6 +43,17 @@ const Navbar = () => {
                     >
                         Залы
                     </Link>
+
+                    {currentUser ? (
+                        <span className="user-name">
+                            {currentUser.name}
+                        </span>
+                    ) : (
+                        <button className="auth-btn" onClick={onLoginClick}>
+                            Войти
+                        </button>
+                    )}
+
                 </div>
             </div>
         </nav>

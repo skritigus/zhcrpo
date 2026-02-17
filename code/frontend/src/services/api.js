@@ -341,3 +341,20 @@ export const deleteHall = async (id) => { // НОВАЯ ФУНКЦИЯ
         throw new Error(`Не удалось удалить зал ${id}: ${error.message}`);
     }
 };
+
+export const login = async (data) => {
+    return await request('/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    });
+};
+
+
+export const register = async (data) => {
+    return await request('/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    });
+};
