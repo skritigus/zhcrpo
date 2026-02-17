@@ -92,7 +92,7 @@ public class GroupServiceImpl implements GroupService {
             return savedGroup;
         } else {
             throw new AlreadyExistsException("Group already exists. " +
-                    "Trainer: " + group.getTrainer().getName() +
+                    "Trainer: " + group.getTrainer().getUser().getName() +
                     ", Difficulty: " + group.getDifficulty());
         }
     }
@@ -134,7 +134,7 @@ public class GroupServiceImpl implements GroupService {
         } else {
             throw new ResourceNotFoundException("The group does not exist." +
                     " ID: " + group.getId() +
-                    ", Trainer: " + group.getTrainer().getName() +
+                    ", Trainer: " + group.getTrainer().getUser().getName() +
                     ", Difficulty: " + group.getDifficulty());
         }
         cacheConfig.putGroup(group.getId(), updatedGroup);

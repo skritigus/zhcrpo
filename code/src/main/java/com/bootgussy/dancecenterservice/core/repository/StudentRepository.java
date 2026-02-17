@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    List<Student> findByName(String name);
+    //List<Student> findByName(String name);
 
+    @Query(value = "SELECT s.* FROM students s " +
+            "LEFT JOIN users u ON s.user_id = u.id" +
+            "WHERE u.name = :name AND u.phone_number = :phoneNumber", nativeQuery = true)
     List<Student> findByNameAndPhoneNumber(String name, String phoneNumber);
 }

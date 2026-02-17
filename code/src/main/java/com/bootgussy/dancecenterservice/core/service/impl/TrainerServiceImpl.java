@@ -51,8 +51,8 @@ public class TrainerServiceImpl implements TrainerService {
         Trainer savedTrainer;
 
         if (
-                trainer.getName() == null ||
-                        trainer.getPhoneNumber() == null ||
+                trainer.getUser().getName() == null ||
+                        trainer.getUser().getPhoneNumber() == null ||
                         trainer.getDanceStyle() == null
         ) {
             throw new ResourceNotFoundException("Incorrect JSON. All fields must be filled " +
@@ -60,16 +60,16 @@ public class TrainerServiceImpl implements TrainerService {
         }
 
         if (trainerRepository.findByNameAndPhoneNumberAndDanceStyle(
-                        trainer.getName(),
-                        trainer.getPhoneNumber(),
+                        trainer.getUser().getName(),
+                        trainer.getUser().getPhoneNumber(),
                         trainer.getDanceStyle()
                 )
                 .isEmpty()) {
             savedTrainer = trainerRepository.save(trainer);
         } else {
             throw new AlreadyExistsException("Trainer already exists. " +
-                    "Name: " + trainer.getName() +
-                    ", Phone number: " + trainer.getPhoneNumber() +
+                    "Name: " + trainer.getUser().getName() +
+                    ", Phone number: " + trainer.getUser().getPhoneNumber() +
                     ", Dance style: " + trainer.getDanceStyle());
         }
 
@@ -83,8 +83,8 @@ public class TrainerServiceImpl implements TrainerService {
         Trainer updatedTrainer;
 
         if (
-                trainer.getName() == null ||
-                        trainer.getPhoneNumber() == null ||
+                trainer.getUser().getName() == null ||
+                        trainer.getUser().getPhoneNumber() == null ||
                         trainer.getDanceStyle() == null
         ) {
             throw new ResourceNotFoundException("Incorrect JSON. All fields must be filled " +
@@ -92,14 +92,14 @@ public class TrainerServiceImpl implements TrainerService {
         }
 
         if (!trainerRepository.findByNameAndPhoneNumberAndDanceStyle(
-                        trainer.getName(),
-                        trainer.getPhoneNumber(),
+                        trainer.getUser().getName(),
+                        trainer.getUser().getPhoneNumber(),
                         trainer.getDanceStyle()
                 )
                 .isEmpty()) {
             throw new AlreadyExistsException("Trainer already exists. " +
-                    "Name: " + trainer.getName() +
-                    ", Phone number: " + trainer.getPhoneNumber() +
+                    "Name: " + trainer.getUser().getName() +
+                    ", Phone number: " + trainer.getUser().getPhoneNumber() +
                     ", Dance style: " + trainer.getDanceStyle());
         }
 
@@ -108,8 +108,8 @@ public class TrainerServiceImpl implements TrainerService {
         } else {
             throw new ResourceNotFoundException("The trainer does not exist. " +
                     "ID: " + trainer.getId() +
-                    ", Name: " + trainer.getName() +
-                    ", Phone number: " + trainer.getPhoneNumber() +
+                    ", Name: " + trainer.getUser().getName() +
+                    ", Phone number: " + trainer.getUser().getPhoneNumber() +
                     ", Dance style: " + trainer.getDanceStyle());
         }
 
