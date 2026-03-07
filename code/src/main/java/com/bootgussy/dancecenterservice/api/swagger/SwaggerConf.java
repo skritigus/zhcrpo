@@ -3,24 +3,29 @@ package com.bootgussy.dancecenterservice.api.swagger;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.media.StringSchema;
-import io.swagger.v3.oas.models.parameters.Parameter;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class SwaggerConf {
     @Bean
     public OpenAPI customOpenApi() {
+        final String securitySchemeName = "bearerAuth";
+
         return new OpenAPI()
-                .components(new Components()
-                        .addParameters("X-Role", new Parameter()
-                                .in("header")
-                                .name("X-Role")
-                                .description("Введите роль: ROLE_ADMIN, ROLE_STUDENT или ROLE_TRAINER")
-                                .schema(new StringSchema()._default("ROLE_ADMIN"))
-                                .required(false)))
                 .info(new Info()
                         .title("Dance Center Swagger API")
                         .version("1.0")
-                        .description("API for managing dance center"));
+                        .description("API for managing dance center"))
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                .components(new Components()
+                        .addSecuritySchemes(securitySchemeName,
+                                new SecurityScheme()
+                                        .name(securitySchemeName)
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")));
     }
 }

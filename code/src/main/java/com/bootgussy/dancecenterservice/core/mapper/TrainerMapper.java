@@ -2,7 +2,6 @@ package com.bootgussy.dancecenterservice.core.mapper;
 
 import com.bootgussy.dancecenterservice.api.dto.create.TrainerCreateDto;
 import com.bootgussy.dancecenterservice.api.dto.response.TrainerResponseDto;
-import com.bootgussy.dancecenterservice.core.model.Group;
 import com.bootgussy.dancecenterservice.core.model.Trainer;
 import com.bootgussy.dancecenterservice.core.repository.GroupRepository;
 import java.util.List;

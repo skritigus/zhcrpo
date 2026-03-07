@@ -5,7 +5,6 @@ import com.bootgussy.dancecenterservice.core.model.Hall;
 import com.bootgussy.dancecenterservice.core.model.ScheduleItem;
 import com.bootgussy.dancecenterservice.core.model.Student;
 import com.bootgussy.dancecenterservice.core.model.Trainer;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

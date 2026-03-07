@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ public class LogController {
 
     @Operation(summary = "Request log file sorted by date and logging level")
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<byte[]> getLogFile(
             @RequestParam String date,
             @RequestParam(required = false, defaultValue = "all") String level) {
@@ -82,6 +84,7 @@ public class LogController {
 
     @Operation(summary = "Create a task to generate a log file asynchronously")
     @PostMapping("/generate")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> createLogFileTask(
             @RequestParam String date,
             @RequestParam(required = false, defaultValue = "all") String level) {
@@ -97,6 +100,7 @@ public class LogController {
 
     @Operation(summary = "Get the status of a log file generation task")
     @GetMapping("/status/{taskId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<LogFileTask> getTaskStatus(@PathVariable String taskId) {
         LogFileTask task = logFileId.getTaskStatus(taskId);
         if (task == null) {
@@ -109,6 +113,7 @@ public class LogController {
 
     @Operation(summary = "Download the generated log file by task ID")
     @GetMapping("/download/{taskId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<byte[]> downloadLogFile(@PathVariable String taskId) {
         Path filePath = logFileId.getLogFilePath(taskId);
         if (filePath == null) {

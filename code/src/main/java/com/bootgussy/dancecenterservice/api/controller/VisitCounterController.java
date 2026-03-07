@@ -4,6 +4,7 @@ import com.bootgussy.dancecenterservice.core.aspect.VisitCounter;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ public class VisitCounterController {
 
     @Operation(summary = "Get the number of visits for a specific URL")
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Long> getVisitCount(@RequestParam String url) {
         long count = visitCounter.getVisitCount(url);
         return ResponseEntity.ok(count);
@@ -27,6 +29,7 @@ public class VisitCounterController {
 
     @Operation(summary = "Get all visited URLs and their visit counts")
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Map<String, Long>> getAllVisitCounts() {
         Map<String, Long> allVisitCounts = visitCounter.getAllVisitCounts();
         return ResponseEntity.ok(allVisitCounts);

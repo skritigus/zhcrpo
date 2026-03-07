@@ -15,6 +15,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,7 @@ public class HallController {
             @ApiResponse(responseCode = "409", description = "This hall already exists")
     })
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HallResponseDto> createHall(
             @Parameter(description = "Data to create the hall") @Valid @RequestBody HallCreateDto createDto) {
         Hall hall = hallMapper.toEntity(createDto);
@@ -74,6 +76,7 @@ public class HallController {
             @ApiResponse(responseCode = "409", description = "This hall already exists")
     })
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HallResponseDto> updateHall(
             @Parameter(description = "Hall's ID", example = "1") @PathVariable Long id,
             @Parameter(description = "Data to update the hall") @Valid @RequestBody HallCreateDto createDto) {
@@ -89,6 +92,7 @@ public class HallController {
             @ApiResponse(responseCode = "404", description = "Hall not found")
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteHall(
             @Parameter(description = "Hall's ID", example = "1") @PathVariable Long id) {
         hallService.deleteHall(id);

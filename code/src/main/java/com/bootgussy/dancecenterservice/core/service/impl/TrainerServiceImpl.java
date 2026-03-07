@@ -6,7 +6,6 @@ import com.bootgussy.dancecenterservice.core.exception.ResourceNotFoundException
 import com.bootgussy.dancecenterservice.core.model.Trainer;
 import com.bootgussy.dancecenterservice.core.repository.TrainerRepository;
 import com.bootgussy.dancecenterservice.core.service.TrainerService;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
