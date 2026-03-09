@@ -1,4 +1,3 @@
-
 package com.bootgussy.dancecenterservice.api.dto.response;
 
 import java.util.List;

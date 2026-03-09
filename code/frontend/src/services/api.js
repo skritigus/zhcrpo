@@ -1,15 +1,42 @@
 // src/services/api.js
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'http://localhost:8080/api';
+
+let accessToken = null;
+
+export const setAccessToken = (token) => {
+    accessToken = token;
+};
 
 async function request(endpoint, options = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
     // console.log(`[API] Запрос: ${options.method || 'GET'} ${url}`);
     // console.log(`[API] Тело запроса для ${options.method || 'GET'} ${url}:`, options.body);
 
+    const headers = {
+        'Content-Type': 'application/json',
+        ...options.headers,
+    };
+
+    if (accessToken) {
+        headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
+    const config = {
+        ...options,
+        headers: headers
+    };
 
     try {
         const response = await fetch(url, options);
         // console.log(`[API] Статус ответа для ${options.method || 'GET'} ${url}: ${response.status}`);
+
+        if (response.status === 401 && endpoint !== '/auth/login') {
+            const success = await handleRefresh();
+            if (success) {
+                // Повторяем запрос с новым токеном
+                return request(endpoint, options);
+            }
+        }
 
         if (!response.ok) {
             let errorData;
@@ -58,6 +85,20 @@ async function request(endpoint, options = {}) {
         // console.error(`[API] Общая ошибка в функции request для ${options.method || 'GET'} ${url}:`, error);
         throw error;
     }
+}
+
+async function handleRefresh() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/auth/refresh`, { method: 'POST' });
+        if (response.ok) {
+            const data = await response.json();
+            setAccessToken(data.accessToken); // Сохраняем новый токен в память
+            return true;
+        }
+    } catch (e) {
+        console.error("Session expired");
+    }
+    return false;
 }
 
 export const fetchScheduleItems = async () => {

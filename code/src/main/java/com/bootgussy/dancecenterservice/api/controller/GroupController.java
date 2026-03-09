@@ -15,6 +15,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,6 +70,7 @@ public class GroupController {
             @ApiResponse(responseCode = "409", description = "This group already exists")
     })
     @PostMapping
+    @PreAuthorize("hasAuthority('TRAINER') or hasAuthority('ADMIN')")
     public ResponseEntity<GroupResponseDto> createGroup(
             @Parameter(description = "Data to create the group")
             @Valid @RequestBody GroupCreateDto createDto) {
@@ -85,6 +87,7 @@ public class GroupController {
             @ApiResponse(responseCode = "409", description = "This group already exists")
     })
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('TRAINER') or hasAuthority('ADMIN')")
     public ResponseEntity<GroupResponseDto> updateGroup(
             @Parameter(description = "Group's ID", example = "1") @PathVariable Long id,
             @Parameter(description = "Data to update the group")
@@ -101,6 +104,7 @@ public class GroupController {
             @ApiResponse(responseCode = "404", description = "Group not found")
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('TRAINER') or hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteGroup(
             @Parameter(description = "Group's ID", example = "1") @PathVariable Long id) {
         groupService.deleteGroup(id);

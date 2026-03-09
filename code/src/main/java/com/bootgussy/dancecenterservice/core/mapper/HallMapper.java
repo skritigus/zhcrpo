@@ -3,7 +3,6 @@ package com.bootgussy.dancecenterservice.core.mapper;
 import com.bootgussy.dancecenterservice.api.dto.create.HallCreateDto;
 import com.bootgussy.dancecenterservice.api.dto.response.HallResponseDto;
 import com.bootgussy.dancecenterservice.core.model.Hall;
-import com.bootgussy.dancecenterservice.core.model.ScheduleItem;
 import com.bootgussy.dancecenterservice.core.repository.ScheduleItemRepository;
 import java.util.List;
 import org.mapstruct.Mapper;

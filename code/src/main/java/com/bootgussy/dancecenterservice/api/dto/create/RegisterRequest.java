@@ -1,4 +1,4 @@
-package com.bootgussy.dancecenterservice.api.dto.response;
+package com.bootgussy.dancecenterservice.api.dto.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,15 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-    //private String token;
+public class RegisterRequest {
     private String username;
-    private List<String> roles;
+    private String password;
+    private String phoneNumber;
 }

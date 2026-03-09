@@ -89,7 +89,7 @@ const AnimatedRoutes = () => {
                             path="/halls"
                             element={<HallsPage appAllHalls={halls} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} />}
                         />
-                        <Route path="/login" element={<Auth />} />
+
                     </Routes>
                 </div>
             </CSSTransition>

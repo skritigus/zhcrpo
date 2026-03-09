@@ -3,16 +3,15 @@ package com.bootgussy.dancecenterservice.core.mapper;
 import com.bootgussy.dancecenterservice.api.dto.create.GroupCreateDto;
 import com.bootgussy.dancecenterservice.api.dto.response.GroupResponseDto;
 import com.bootgussy.dancecenterservice.core.model.Group;
-import com.bootgussy.dancecenterservice.core.model.ScheduleItem;
 import com.bootgussy.dancecenterservice.core.model.Student;
 import com.bootgussy.dancecenterservice.core.model.Trainer;
-import com.bootgussy.dancecenterservice.core.repository.ScheduleItemRepository;
 import com.bootgussy.dancecenterservice.core.repository.StudentRepository;
 import com.bootgussy.dancecenterservice.core.repository.TrainerRepository;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 
 @Mapper(componentModel = "spring")
 public abstract class GroupMapper {
