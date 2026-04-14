@@ -24,6 +24,7 @@ public abstract class ScheduleItemMapper {
     protected HallMapper hallMapper;
 
     @Autowired
+    @org.springframework.context.annotation.Lazy
     protected GroupMapper groupMapper;
 
     @Mapping(target = "hall",
@@ -34,8 +35,7 @@ public abstract class ScheduleItemMapper {
 
     @Mapping(target = "hall",
             expression = "java(hallMapper.toResponseDto(scheduleItem.getHall()))")
-    @Mapping(target = "group",
-            expression = "java(groupMapper.toResponseDto(scheduleItem.getGroup()))")
+    @Mapping(target = "group", expression = "java(groupMapper.toShallowResponseDto(scheduleItem.getGroup()))")
     public abstract ScheduleItemResponseDto toResponseDto(ScheduleItem scheduleItem);
 
     public abstract List<ScheduleItemResponseDto> toResponseDtoList(List<ScheduleItem> scheduleItems);

@@ -1,6 +1,7 @@
 package com.bootgussy.dancecenterservice.core.mapper;
 
 import com.bootgussy.dancecenterservice.api.dto.create.TrainerCreateDto;
+import com.bootgussy.dancecenterservice.api.dto.response.TrainerDashboardResponseDto;
 import com.bootgussy.dancecenterservice.api.dto.response.TrainerResponseDto;
 import com.bootgussy.dancecenterservice.core.model.Trainer;
 import java.util.List;
@@ -9,6 +10,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public abstract class TrainerMapper {
+    @org.springframework.beans.factory.annotation.Autowired
+    @org.springframework.context.annotation.Lazy
+    protected GroupMapper groupMapper;
     @Mapping(target = "user.name", source = "name")
     @Mapping(target = "user.phoneNumber", source = "phoneNumber")
     @Mapping(target = "user.password", source = "password")
@@ -23,4 +27,9 @@ public abstract class TrainerMapper {
     public abstract TrainerResponseDto toResponseDto(Trainer trainer);
 
     public abstract List<TrainerResponseDto> toResponseDtoList(List<Trainer> trainers);
+
+    @Mapping(target = "name", source = "user.name")
+    @Mapping(target = "phoneNumber", source = "user.phoneNumber")
+    @Mapping(target = "groups", expression = "java(groupMapper.toResponseDtoList(trainer.getGroups()))")
+    public abstract TrainerDashboardResponseDto toDashboardDto(Trainer trainer);
 }

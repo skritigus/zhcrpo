@@ -2,7 +2,13 @@ package com.bootgussy.dancecenterservice.core.service.impl;
 
 import com.bootgussy.dancecenterservice.core.exception.AlreadyExistsException;
 import com.bootgussy.dancecenterservice.core.exception.ResourceNotFoundException;
+import com.bootgussy.dancecenterservice.core.model.Role;
+import com.bootgussy.dancecenterservice.core.model.Student;
+import com.bootgussy.dancecenterservice.core.model.Trainer;
 import com.bootgussy.dancecenterservice.core.model.User;
+import com.bootgussy.dancecenterservice.core.repository.RoleRepository;
+import com.bootgussy.dancecenterservice.core.repository.StudentRepository;
+import com.bootgussy.dancecenterservice.core.repository.TrainerRepository;
 import com.bootgussy.dancecenterservice.core.repository.UserRepository;
 import com.bootgussy.dancecenterservice.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +17,26 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final StudentRepository studentRepository;
+    private final TrainerRepository trainerRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                          RoleRepository roleRepository,
+                          StudentRepository studentRepository,
+                          TrainerRepository trainerRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.studentRepository = studentRepository;
+        this.trainerRepository = trainerRepository;
     }
 
     @Override
@@ -96,5 +112,44 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found. ID: " + id));
 
         userRepository.delete(user);
+    }
+
+    @Override
+    @Transactional
+    public User updateUserRoles(Long id, List<String> roleNames) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found centered with ID: " + id));
+
+        List<Role> roles = new ArrayList<>();
+        for (String roleName : roleNames) {
+            Role role = roleRepository.findByName(roleName)
+                    .orElseThrow(() -> new ResourceNotFoundException("Role not found: " + roleName));
+            roles.add(role);
+        }
+        user.setRoles(roles);
+
+        // Sync Student/Trainer entities
+        if (roleNames.contains("STUDENT")) {
+            if (studentRepository.findByUserId(id).isEmpty()) {
+                Student student = new Student();
+                student.setUser(user);
+                studentRepository.save(student);
+            }
+        } else {
+            studentRepository.findByUserId(id).ifPresent(studentRepository::delete);
+        }
+
+        if (roleNames.contains("TRAINER")) {
+            if (trainerRepository.findByUserId(id).isEmpty()) {
+                Trainer trainer = new Trainer();
+                trainer.setUser(user);
+                trainer.setDanceStyle("Not specified"); // Default value
+                trainerRepository.save(trainer);
+            }
+        } else {
+            trainerRepository.findByUserId(id).ifPresent(trainerRepository::delete);
+        }
+
+        return userRepository.save(user);
     }
 }

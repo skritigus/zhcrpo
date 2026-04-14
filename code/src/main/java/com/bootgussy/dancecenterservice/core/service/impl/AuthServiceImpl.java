@@ -8,6 +8,8 @@ import com.bootgussy.dancecenterservice.core.exception.ResourceNotFoundException
 import com.bootgussy.dancecenterservice.core.model.User;
 import com.bootgussy.dancecenterservice.core.repository.RefreshTokenRepository;
 import com.bootgussy.dancecenterservice.core.repository.RoleRepository;
+import com.bootgussy.dancecenterservice.core.repository.StudentRepository;
+import com.bootgussy.dancecenterservice.core.model.Student;
 import com.bootgussy.dancecenterservice.core.service.AuthService;
 import com.bootgussy.dancecenterservice.core.service.TokenService;
 import com.bootgussy.dancecenterservice.core.service.UserService;
@@ -32,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     private final TokenService tokenService;
     private final JwtUtils jwtUtils;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
     public AuthServiceImpl(AuthenticationManager authenticationManager,
@@ -40,7 +43,8 @@ public class AuthServiceImpl implements AuthService {
                            PasswordEncoder passwordEncoder,
                            UserService userService,
                            JwtUtils jwtUtils,
-                           RefreshTokenRepository refreshTokenRepository){
+                           RefreshTokenRepository refreshTokenRepository,
+                           StudentRepository studentRepository){
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
         this.userService = userService;
@@ -48,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
         this.refreshTokenRepository = refreshTokenRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -78,7 +83,12 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new ResourceNotFoundException("Error"))
         ));
 
-        userService.createUser(user);
+        User createdUser = userService.createUser(user);
+
+        // Create student entity
+        Student student = new Student();
+        student.setUser(createdUser);
+        studentRepository.save(student);
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

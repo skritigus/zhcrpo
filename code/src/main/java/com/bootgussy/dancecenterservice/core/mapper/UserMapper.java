@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class UserMapper {
     @Mapping(target = "rolesId", source = "roles", qualifiedByName = "mapRolesToIds")
+    @Mapping(target = "roleNames", source = "roles", qualifiedByName = "mapRolesToNames")
     public abstract UserResponseDto toResponseDto(User user);
 
     @Mapping(target = "id", ignore = true)
@@ -28,6 +29,14 @@ public abstract class UserMapper {
         if (roles == null) return null;
         return roles.stream()
                 .map(Role::getId)
+                .collect(Collectors.toList());
+    }
+
+    @Named("mapRolesToNames")
+    protected List<String> mapRolesToNames(List<Role> roles) {
+        if (roles == null) return null;
+        return roles.stream()
+                .map(Role::getName)
                 .collect(Collectors.toList());
     }
 }

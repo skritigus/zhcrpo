@@ -1,9 +1,11 @@
 package com.bootgussy.dancecenterservice.api.controller;
 
 import com.bootgussy.dancecenterservice.api.dto.create.StudentCreateDto;
+import com.bootgussy.dancecenterservice.api.dto.response.StudentDashboardResponseDto;
 import com.bootgussy.dancecenterservice.api.dto.response.StudentResponseDto;
 import com.bootgussy.dancecenterservice.core.mapper.StudentMapper;
 import com.bootgussy.dancecenterservice.core.model.Student;
+import com.bootgussy.dancecenterservice.core.model.User;
 import com.bootgussy.dancecenterservice.core.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +17,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,5 +101,13 @@ public class StudentController {
             @Parameter(description = "Student's ID", example = "1") @PathVariable Long id) {
         studentService.deleteStudent(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Operation(summary = "Get current student info", description = "Retrieves current logged-in student info")
+    @GetMapping("/me")
+    public ResponseEntity<StudentDashboardResponseDto> getMyInfo() {
+        Long userId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Student student = studentService.findStudentByUserId(userId);
+        return ResponseEntity.ok(studentMapper.toDashboardDto(student));
     }
 }

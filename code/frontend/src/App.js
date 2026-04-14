@@ -10,6 +10,7 @@ import HallsPage from './pages/HallsPage';
 import AuthPage from './pages/AuthPage';
 import StudentPage from './pages/StudentPage';
 import TrainerPage from './pages/TrainerPage';
+import AdminUsersPage from './pages/AdminUsersPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import AddScheduleModal from './components/Schedule/AddScheduleModal';
@@ -139,6 +140,11 @@ const AnimatedRoutes = () => {
                         <Route path="/admin/halls" element={
                             <ProtectedRoute allowedRoles={['ADMIN']}>
                                 <HallsPage appAllHalls={halls} isLoadingAppLevelData={isLoadingAppLevelData} showAppNotification={showAppNotification} onMajorDataChange={loadInitialData} />
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/admin/users" element={
+                            <ProtectedRoute allowedRoles={['ADMIN']}>
+                                <AdminUsersPage showAppNotification={showAppNotification} onRolesUpdated={loadInitialData} />
                             </ProtectedRoute>
                         } />
                         
