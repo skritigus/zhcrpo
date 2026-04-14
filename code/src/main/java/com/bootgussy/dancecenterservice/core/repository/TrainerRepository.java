@@ -18,4 +18,6 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     List<Trainer> findByNameAndPhoneNumberAndDanceStyle(String name, String phoneNumber, String danceStyle);
 
     Optional<Trainer> findByUserPhoneNumber(String phoneNumber);
+
+    Optional<Trainer> findByUserId(Long userId);
 }

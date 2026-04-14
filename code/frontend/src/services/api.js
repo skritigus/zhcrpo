@@ -434,3 +434,42 @@ export const register = async (data) => {
     }
     return response;
 };
+export const getMyStudentInfo = async () => {
+    try {
+        return await request('/student/me');
+    } catch (error) {
+        console.error("API Ошибка (getMyStudentInfo):", error.message);
+        throw error;
+    }
+};
+
+export const getMyTrainerInfo = async () => {
+    try {
+        return await request('/trainer/me');
+    } catch (error) {
+        console.error("API Ошибка (getMyTrainerInfo):", error.message);
+        throw error;
+    }
+};
+
+export const getAllUsers = async () => {
+    try {
+        return await request('/user');
+    } catch (error) {
+        console.error("API Ошибка (getAllUsers):", error.message);
+        throw error;
+    }
+};
+
+export const updateUserRoles = async (userId, roleNames) => {
+    try {
+        return await request(`/user/${userId}/roles`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(roleNames),
+        });
+    } catch (error) {
+        console.error(`API Ошибка (updateUserRoles id:${userId}):`, error.message);
+        throw error;
+    }
+};

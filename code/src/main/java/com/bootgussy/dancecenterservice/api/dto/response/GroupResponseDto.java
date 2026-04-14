@@ -22,4 +22,6 @@ public class GroupResponseDto {
     private List<StudentResponseDto> students;
 
     private List<Long> scheduleItemsId;
+
+    private List<ScheduleItemResponseDto> scheduleItems;
 }

@@ -1,9 +1,11 @@
 package com.bootgussy.dancecenterservice.api.controller;
 
 import com.bootgussy.dancecenterservice.api.dto.create.TrainerCreateDto;
+import com.bootgussy.dancecenterservice.api.dto.response.TrainerDashboardResponseDto;
 import com.bootgussy.dancecenterservice.api.dto.response.TrainerResponseDto;
 import com.bootgussy.dancecenterservice.core.mapper.TrainerMapper;
 import com.bootgussy.dancecenterservice.core.model.Trainer;
+import com.bootgussy.dancecenterservice.core.model.User;
 import com.bootgussy.dancecenterservice.core.service.TrainerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +17,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,5 +101,13 @@ public class TrainerController {
             @Parameter(description = "Trainer's ID", example = "1") @PathVariable Long id) {
         trainerService.deleteTrainer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Operation(summary = "Get current trainer info", description = "Retrieves current logged-in trainer info")
+    @GetMapping("/me")
+    public ResponseEntity<TrainerDashboardResponseDto> getMyInfo() {
+        Long userId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Trainer trainer = trainerService.findTrainerByUserId(userId);
+        return ResponseEntity.ok(trainerMapper.toDashboardDto(trainer));
     }
 }

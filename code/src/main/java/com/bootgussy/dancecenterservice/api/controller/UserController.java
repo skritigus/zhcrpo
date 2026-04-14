@@ -111,4 +111,18 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @Operation(summary = "Update user roles", description = "Updates roles for a specific user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Roles updated successfully"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
+    @PutMapping("/{id}/roles")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<UserResponseDto> updateUserRoles(
+            @Parameter(description = "User's ID", example = "1") @PathVariable Long id,
+            @RequestBody List<String> roleNames) {
+        User updatedUser = userService.updateUserRoles(id, roleNames);
+        return ResponseEntity.ok(userMapper.toResponseDto(updatedUser));
+    }
 }

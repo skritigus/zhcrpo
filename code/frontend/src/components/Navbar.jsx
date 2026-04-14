@@ -60,6 +60,12 @@ const Navbar = () => {
                             >
                                 Залы
                             </Link>
+                            <Link
+                                to="/admin/users"
+                                className={`nav-link ${location.pathname === '/admin/users' ? 'active' : ''}`}
+                            >
+                                Пользователи
+                            </Link>
                         </>
                     )}
                     

@@ -18,4 +18,5 @@ public class UserResponseDto {
     private String name;
     private String phoneNumber;
     private List<Long> rolesId;
+    private List<String> roleNames;
 }
